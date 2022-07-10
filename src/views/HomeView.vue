@@ -1,18 +1,35 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+<template v-slot:slot1>
+  <div class="splash-container">
+      <div class="splash">
+        <h1>Splendid Food</h1>
+      </div>
+    </div>
+    <main class="wrapper">
+      <h2>Recommended</h2>
+      <div class="recommended">
+        <ProductCart 
+        v-for="item in items.slice(0,3)"  
+        class="card"
+        :item="item"
+        :cart="cart"
+        :addToCart="addToCart"
+        :get_icon="get_icon"
+        >
+        <template v-slot:slot2>
+        <h1>Home page</h1>
+        </template>
+        </ProductCart>
+      </div>
+    </main>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
-
-@Options({
+import ProductCart from '@/components/ProductCart.vue'
+export default {
+  name: 'HomeView',
+  props: ['items', 'get_icon', 'addToCart', 'cart'],
   components: {
-    HelloWorld
+    ProductCart
   }
-})
-export default class HomeView extends Vue {}
+}
 </script>
